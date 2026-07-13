@@ -1,0 +1,16 @@
+event_date,event_name,description,category
+1990-08-02,Gulf War Begins,Iraq invades Kuwait causing major supply fears,Conflict
+1997-07-02,Asian Financial Crisis,Currency crisis reduces demand across Asia,Economic
+2001-09-11,September 11 Attacks,Terrorist attacks cause market uncertainty,Geopolitical
+2003-03-20,Iraq War Begins,US-led invasion of Iraq disrupts oil supply,Conflict
+2008-09-15,Global Financial Crisis,Lehman Brothers collapse triggers demand collapse,Economic
+2011-02-15,Arab Spring / Libya Conflict,Civil unrest disrupts Libyan oil production,Conflict
+2014-11-27,OPEC Refuses Production Cut,OPEC maintains output despite falling prices,OPEC Policy
+2016-01-16,Iran Sanctions Lifted,Iran re-enters global oil market post-sanctions,Sanctions
+2016-11-30,OPEC Production Cut Agreement,OPEC agrees to first cut in 8 years,OPEC Policy
+2018-05-08,US Exits Iran Nuclear Deal,US reimposes sanctions on Iran oil exports,Sanctions
+2020-03-08,Saudi-Russia Price War,Saudi Arabia floods market after OPEC+ talks collapse,OPEC Policy
+2020-04-20,COVID-19 Demand Collapse,Oil demand crashes amid global lockdowns,Economic
+2022-02-24,Russia Invades Ukraine,War triggers global energy supply shock,Conflict
+2022-06-02,OPEC+ Output Increase,OPEC+ agrees to accelerate production increases,OPEC Policy
+2022-09-05,OPEC+ Production Cut,OPEC+ cuts output to support falling prices,OPEC Policy
