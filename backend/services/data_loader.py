@@ -20,13 +20,34 @@ def load_prices():
     """
     Loads Brent oil price data.
     Expects columns: Date, Price
-    If the real file is not present yet, generates placeholder
-    synthetic data so the API/frontend can be developed in parallel.
+
+    The instructor-provided dataset mixes two date formats:
+      - '15-Apr-20'      (day-month abbreviation-year, older rows)
+      - 'Apr 22, 2020'   (month abbreviation day, year, newer rows)
+    Both are parsed and combined so no rows are silently dropped.
+
+    Falls back to generated placeholder price data if the real file
+    is not present yet.
     """
     if os.path.exists(PRICES_FILE):
         df = pd.read_csv(PRICES_FILE)
-        df["Date"] = pd.to_datetime(df["Date"], format="%d-%b-%y", errors="coerce")
-        df = df.dropna(subset=["Date"]).sort_values("Date")
+
+        # Try the older short format first: e.g. 15-Apr-20
+        parsed_old = pd.to_datetime(df["Date"], format="%d-%b-%y", errors="coerce")
+
+        # Try the newer long format: e.g. Apr 22, 2020
+        parsed_new = pd.to_datetime(df["Date"], format="%b %d, %Y", errors="coerce")
+
+        # Combine: use whichever format successfully parsed each row
+        df["Date"] = parsed_old.fillna(parsed_new)
+
+        before = len(df)
+        df = df.dropna(subset=["Date"]).sort_values("Date").reset_index(drop=True)
+        after = len(df)
+
+        if before != after:
+            print(f"Warning: dropped {before - after} rows with unparseable dates")
+
         return df
 
     # --- Placeholder synthetic data (used only until real CSV is added) ---
