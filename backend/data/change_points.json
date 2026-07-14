@@ -1,0 +1,14 @@
+[
+  {
+    "change_point_date": "2008-07-31",
+    "mean_log_return_before": 0.00016476303801539135,
+    "mean_log_return_after": 0.00024095854581664692,
+    "avg_price_before": 133.57,
+    "avg_price_after": 110.3,
+    "percent_change": -17.42,
+    "probability_increase": 0.583,
+    "likely_event": "Global Financial Crisis",
+    "likely_event_date": "2008-09-15",
+    "days_from_event": 46
+  }
+]
