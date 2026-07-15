@@ -74,6 +74,71 @@ Serves:
 - `GET /api/prices` — historical Brent prices (supports `?start_date` & `?end_date`)
 - `GET /api/events` — compiled key events dataset
 - `GET /api/changepoints` — detected change points from the Bayesian model
+## Task 2: Bayesian Change Point Analysis
+
+### Methodology
+
+A Bayesian change point model was built in PyMC to detect structural
+breaks in Brent oil log returns:
+
+- **tau**: discrete uniform prior over all day indices in the series
+- **mu1, mu2**: "before" and "after" mean log-return parameters
+- **pm.math.switch**: selects mu1 or mu2 depending on whether the day
+  index is before or after tau
+- **Likelihood**: Normal distribution connecting the switch function to
+  observed log returns
+- **Sampling**: MCMC via `pm.sample()` (NUTS for mu1/mu2/sigma, Metropolis
+  for the discrete tau), with convergence checked via `r_hat` and trace
+  plots
+
+### Two analysis approaches
+
+**1. Full 35-year series (1987–2022).** Produced a technically convergent
+but highly diffuse posterior for tau (std ≈ 3,000 days), reflecting the
+presence of multiple real structural breaks across the full history that
+a single-change-point model cannot individually resolve. Documented as a
+limitation rather than a standalone finding.
+
+**2. Focused event windows.** The same model applied to shorter windows
+bracketing specific researched events produced sharp, high-confidence
+change points:
+
+| Event Window | Detected Change Point | Nearest Event | Days from Event | Price Shift | % Change |
+|---|---|---|---|---|---|
+| COVID-19 (2019–2020) | 2020-04-22 | COVID-19 Demand Collapse (2020-04-20) | 2 | $23.90 → $27.35 | +14.44% |
+| OPEC decision (2014–2015) | 2015-01-16 | OPEC Refuses Production Cut (2014-11-27) | 50 | $57.25 → $54.30 | -5.16% |
+
+### How to run
+
+```bash
+cd backend
+python3 analysis/changepoint_model.py
+```
+
+Or interactively via the notebook:
+```bash
+cd notebooks
+jupyter notebook changepoint_analysis.ipynb
+```
+
+### Outputs
+
+Saved to `backend/outputs/`:
+- `trace_plot_covid_window.png` / `posterior_means_covid_window.png`
+- `posterior_tau*.png` — change point posterior distributions
+- `model_summary*.txt` — convergence diagnostics (r_hat, ESS)
+
+Saved to `backend/data/`:
+- `change_points.json` — machine-readable results consumed by the Task 3
+  dashboard API (`GET /api/changepoints`)
+
+### Key limitation
+
+Change point detection identifies **statistical association in time**,
+not proven causation. See `docs/Task1_Analysis_Plan.docx` (Section 4.3)
+for a full discussion of the distinction, and the notebook's "Future Work"
+section for how multi-change-point or Markov-Switching models could
+address the full-series limitation.
 
 ## Frontend Dashboard (Task 3)
 
