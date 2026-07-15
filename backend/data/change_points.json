@@ -1,14 +1,24 @@
 [
   {
-    "change_point_date": "2008-07-31",
-    "mean_log_return_before": 0.00016476303801539135,
-    "mean_log_return_after": 0.00024095854581664692,
-    "avg_price_before": 133.57,
-    "avg_price_after": 110.3,
-    "percent_change": -17.42,
-    "probability_increase": 0.583,
-    "likely_event": "Global Financial Crisis",
-    "likely_event_date": "2008-09-15",
-    "days_from_event": 46
+    "change_point_date": "2020-04-22",
+    "window_analyzed": "2019-06-01 to 2020-12-31 (COVID-19)",
+    "avg_price_before": 23.9,
+    "avg_price_after": 27.35,
+    "percent_change": 14.44,
+    "probability_increase": 0.889,
+    "likely_event": "COVID-19 Demand Collapse",
+    "likely_event_date": "2020-04-20",
+    "days_from_event": 2
+  },
+  {
+    "change_point_date": "2015-01-16",
+    "window_analyzed": "2014-08-01 to 2015-03-31 (OPEC decision)",
+    "avg_price_before": 57.25,
+    "avg_price_after": 54.3,
+    "percent_change": -5.16,
+    "probability_increase": 0.86,
+    "likely_event": "OPEC Refuses Production Cut",
+    "likely_event_date": "2014-11-27",
+    "days_from_event": 50
   }
 ]
