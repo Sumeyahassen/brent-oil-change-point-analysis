@@ -147,6 +147,77 @@ cd frontend
 npm install
 npm run dev
 ```
+## Task 3: Interactive Dashboard
+
+### Overview
+
+A full-stack dashboard (Flask backend + React frontend) that lets stakeholders
+explore how major geopolitical, economic, and OPEC policy events correlate
+with Brent oil price movements, and view the Bayesian change points detected
+in Task 2.
+
+### Architecture
+### Backend API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/` | API info and list of available endpoints |
+| GET | `/api/prices` | Historical Brent prices. Optional `?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD` |
+| GET | `/api/events` | Compiled dataset of 15 key oil market events |
+| GET | `/api/changepoints` | Bayesian-detected change points with quantified impact |
+| GET | `/api/events/correlation` | Per-event price shift and volatility. Optional `?window=N` (days, default 30) |
+| GET | `/api/stats` | Overall dataset performance metrics (avg/min/max price, volatility, etc.) |
+
+### Frontend Features
+
+- **Interactive price chart** (Recharts) spanning the full 1987–2022 series
+- **Event highlight lines** color-coded by category (Conflict, Economic, OPEC
+  Policy, Sanctions, Geopolitical), overlaid directly on the price chart
+- **Change point markers** showing the Bayesian model's detected structural
+  breaks (COVID-19, OPEC 2014)
+- **Date range filters**, including one-click presets for key crisis periods
+  (COVID-19, 2014 OPEC decision, 2008 Financial Crisis)
+- **Sortable event correlation table** — click any column header to sort by
+  date, event, category, % change, or volatility
+- **Drill-down detail modal** — click any event (on the chart or in the
+  table) to see full details: price before/after, % change, volatility
+- **Summary stat cards** — average price, min/max, highest volatility period
+- **Responsive layout** — works on desktop, tablet, and mobile
+
+### Setup
+
+**1. Start the backend:**
+```bash
+cd backend
+source venv/bin/activate
+pip install flask flask-cors pandas numpy
+python3 app.py
+```
+Runs on `http://127.0.0.1:5000`.
+
+**2. Start the frontend** (in a separate terminal):
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Runs on `http://localhost:5173` (or the port Vite reports).
+
+**3. Open the frontend URL in your browser.** The dashboard automatically
+fetches all data from the Flask backend on load.
+
+### Tech Stack
+
+- **Backend:** Flask, Flask-CORS, pandas, NumPy
+- **Frontend:** React, Vite, Tailwind CSS v3, Recharts, Axios
+
+### Screenshots
+
+*(Add screenshots here before final submission — see `docs/screenshots/`)*
+
+![Dashboard Overview](docs/screenshots/dashboard-overview.png)
+![Event Detail Modal](docs/screenshots/event-detail.png)
+![Mobile View](docs/screenshots/mobile-view.png)
 
 ## Testing
 
