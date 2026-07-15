@@ -213,11 +213,6 @@ fetches all data from the Flask backend on load.
 
 ### Screenshots
 
-*(Add screenshots here before final submission — see `docs/screenshots/`)*
-
-![Dashboard Overview](docs/screenshots/dashboard-overview.png)
-![Event Detail Modal](docs/screenshots/event-detail.png)
-![Mobile View](docs/screenshots/mobile-view.png)
 
 ## Testing
 
